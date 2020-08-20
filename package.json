@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "get-pixels": "^3.3.2",
-    "terminal-kit": "^1.42.0"
+    "terminal-kit": "^1.42.0",
+    "validator": "^13.1.1"
   }
 }
