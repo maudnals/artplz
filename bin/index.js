@@ -7,16 +7,15 @@ const fetch = require("node-fetch");
 // bug: gauguin (no artworks list)
 // if no artwork list, take a random image from the page
 // bug: vermeer, picasso (displays a small image)
-// bug: "wharol" (typo)
-
+// Edvard Munch[0]
 // OK: degas, klimt, Salvador Dali, magritte
-// OMG so nice: monet#1, mondrian#4, vangogh#4, picasso#4, kahlo#2 or #4, edward hopper#1,
+// OMG so nice: hokusai, wharol, monet#1, mondrian#4, vangogh#4, picasso#4, kahlo#2 or #4, edward hopper#1,
 // TODO add console.logs
+// TODO add prettier
 // TODO enable mode without artist
-// TODO display title
-// TODO add link to wikipedia
 // TODO display anmation WHILE img load
-// TODO manage errors: what if the page is not an artist page? or not found?
+// supported: page not an artist page, page or not found, page is an artist page but contains no artwork list,
+// artwork page is accessible but there's another image in there, typos
 // TODO: throw instead of process.exit()
 
 function validateString(str) {
@@ -42,7 +41,6 @@ function getImgSrcFromArtworkPageHtml(html) {
   const imgAttributes = imgEl.split(" ");
   const srcStr = imgAttributes.find((attr) => attr.startsWith("src="));
   const imgSrc = srcStr.substring(`src="`.length, srcStr.length - `"`.length);
-
   return imgSrc;
 }
 
@@ -76,7 +74,7 @@ function getArtworkWikiPagePathFromArtistPageHtml(html) {
     // clean to keep only the page path (href)
     .map((entry) => entry.substring(0, entry.indexOf(`"`)));
   const randomIdx = Math.floor(Math.random() * artworkWikiPagePaths.length);
-  const artworkWikiPagePath = artworkWikiPagePaths[4];
+  const artworkWikiPagePath = artworkWikiPagePaths[randomIdx];
   return artworkWikiPagePath;
 }
 
@@ -95,8 +93,8 @@ function getArtworkWikiPagePathFromArtistPageHtml(html) {
   const fullDisplayName = nameChunks
     .map((chunk) => `${chunk.charAt(0).toUpperCase()}${chunk.slice(1)}`)
     .join(" ");
-  term.green("\n\nLooking for %s's good stuff", fullDisplayName);
-  await term.slowTyping(".....", { delay: 90 });
+  term.green("\n\nLooking");
+  await term.slowTyping("...", { delay: 100 });
 
   const nameUrlChunk = nameChunks
     // (edward hopper bugfix:) wikipedia capitalizes url path chunks
@@ -111,6 +109,13 @@ function getArtworkWikiPagePathFromArtistPageHtml(html) {
     })
     .then((html) => getArtworkWikiPagePathFromArtistPageHtml(html));
 
+  // /wiki/The_Scream -> The_Scream
+  const artworkTitleChunks = artworkWikiPagePath.split("/");
+  // The_Scream -> The Scream
+  const artworkTitle = artworkTitleChunks[artworkTitleChunks.length - 1]
+    .split("_")
+    .join(" ");
+
   const imgSrc = await fetch(`https://en.wikipedia.org${artworkWikiPagePath}`)
     .then((response) => {
       return response.text();
@@ -118,11 +123,15 @@ function getArtworkWikiPagePathFromArtistPageHtml(html) {
     .then(async (html) => getImgSrcFromArtworkPageHtml(html));
 
   try {
-    term.green("\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+    term.green("\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     await term.drawImage(`https:${imgSrc}`, {
       shrink: { width: term.width * 2.2, height: term.height * 1.4 },
     });
-    term.green("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    term.green("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    term.green("\n%s", artworkTitle);
+    term.green(" — %s \n", fullDisplayName);
+    term.green("Wikipedia");
+
     await term.slowTyping("\n\nOK Bye! ✨\n", { delay: 90 });
     process.exit();
   } catch {
