@@ -1,0 +1,13 @@
+{
+  "name": "artplz",
+  "version": "1.0.0",
+  "main": "bin/index.js",
+  "license": "MIT",
+  "bin": {
+    "artplz": "./bin/index.js"
+  },
+  "dependencies": {
+    "get-pixels": "^3.3.2",
+    "terminal-kit": "^1.42.0"
+  }
+}
