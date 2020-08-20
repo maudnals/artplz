@@ -1,22 +1,6 @@
 const term = require("terminal-kit").terminal;
 const validator = require("validator");
 const fetch = require("node-fetch");
-// fixed: rubens, vlaminque
-// bug monet#4 (paint crash)
-// fixed: dali (not an artist page, land on disambiguation)
-// bug: gauguin (no artworks list)
-// if no artwork list, take a random image from the page
-// bug: vermeer, picasso (displays a small image)
-// Edvard Munch[0]
-// OK: degas, klimt, Salvador Dali, magritte
-// OMG so nice: hokusai, wharol, monet#1, mondrian#4, vangogh#4, picasso#4, kahlo#2 or #4, edward hopper#1,
-// TODO add console.logs
-// TODO add prettier
-// TODO enable mode without artist
-// TODO display anmation WHILE img load
-// supported: page not an artist page, page or not found, page is an artist page but contains no artwork list,
-// artwork page is accessible but there's another image in there, typos
-// TODO: throw instead of process.exit()
 
 function validateString(str) {
   return validator.isAlpha(str) && !validator.isEmpty(str);
@@ -29,7 +13,6 @@ function getImgSrcFromArtworkPageHtml(html) {
     console.log("\n👀 No image found on the artwork page.");
     process.exit();
   }
-
   let imgEl = htmlShort.substring(imgStartIdx, imgStartIdx + 400);
   // (picasso bugfix): wikipedia may have small utility images on top of the page
   // to check if it's a painting: check if SVG
@@ -57,13 +40,6 @@ function getArtworkWikiPagePathFromArtistPageHtml(html) {
     console.log("\n👀 No artwork list found on the artist's page.");
     process.exit();
   }
-
-  //   console.log(artworksHtml);
-
-  // TODO
-  // in case we overflow this table like for degas
-  //   const blaaa = artworksHtml.indexOf("</tr>");
-  //   console.log(blaaa);
 
   const artworkWikiPagePaths = artworksHtml
     // split to distinguish artworks
