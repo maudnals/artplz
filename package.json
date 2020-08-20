@@ -7,7 +7,6 @@
     "artplz": "./bin/index.js"
   },
   "dependencies": {
-    "cheerio": "^1.0.0-rc.3",
     "get-pixels": "^3.3.2",
     "node-fetch": "^2.6.0",
     "terminal-kit": "^1.42.0",
