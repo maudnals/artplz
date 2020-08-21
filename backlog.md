@@ -20,3 +20,5 @@ backlog.md
 
 // supported: page not an artist page, page or not found, page is an artist page but contains no artwork list,
 // artwork page is accessible but there's another image in there, typos
+
+https://developer.okta.com/blog/2019/06/18/command-line-app-with-nodejs#build-your-first-nodejs-command-line-application

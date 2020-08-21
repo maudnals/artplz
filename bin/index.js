@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 const term = require("terminal-kit").terminal;
 const validator = require("validator");
 const fetch = require("node-fetch");
