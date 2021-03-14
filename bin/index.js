@@ -20,14 +20,9 @@ const config = require('./config');
   try {
     const artistNameInput = await getArtistName();
     let artistName = artistNameInput.trim();
-    term.green('\n🎨 Artist?\n');
-    const artistName = await term.inputField().promise;
-    const artistNameChunks = artistName.split(' ').map((chunk) => chunk.trim());
-    artistNameChunks.forEach((chunk) => {
-      if (!utils.validateString(chunk)) {
-        term.red("\nOh no, that's empty or contains special characters 😳\n");
-        term.red('\nTry again!\n');
-        process.exit();
+    if (!artistName) {
+      artistName = config.defaultArtist;
+      logArtistDefault();
     }
     const artistNameChunks = artistName
       .trim()

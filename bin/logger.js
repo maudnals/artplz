@@ -20,6 +20,9 @@ async function logArtworkAndCaption(imgSrc, artworkTitle, artistName) {
   logCaption(artworkTitle, artistName);
 }
 
+async function logArtistDefault() {
+  term.green(`\nOK, picked one for you.`);
+}
 
 async function logWait(artistNameChunks) {
   term.green('\n\nLooking');
