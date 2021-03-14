@@ -4,6 +4,10 @@
 
 - Document how to install (see README)
 
+**Tests:**
+
+- Add a few tests: van gogh
+
 **Bugfix:**
 
 - Proper process exit
@@ -16,6 +20,9 @@
 
 **Features:**
 
+- [DONE] When "enter" (empty input), pick an artist instead of ""\nOh no, that's empty or contains special characters 😳. Try again!\n""
+- Random artist indtead of always Van Gogh
+- "Continue" mode
 - Bigger/Smaller image? Better viewportfit? Center?
 - Add frame
 - Display anmation WHILE img load
@@ -25,6 +32,7 @@
 
 **Code quality:**
 
+- ALternative to accessing exports inline? `.then((html) => scraper.getArtworkWikiPagePathFromArtistPageHtml(html));`
 - Add prettier
 - Better async management
 - TypeScript

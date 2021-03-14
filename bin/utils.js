@@ -23,7 +23,7 @@ function urlPathToArtworkTitle(artworkWikiPagePath) {
 }
 
 // [ 'van', 'gogh' ] -> 'Van Gogh'
-function artistNameChunksToFullDisplayName(nameChunks) {
+function artistNameChunksToDisplayName(nameChunks) {
   return capitalizeAndJoin(nameChunks);
 }
 
@@ -36,7 +36,7 @@ function artistNameChunksToUrlPath(nameChunks) {
 module.exports = {
   capitalizeAndJoin,
   validateString,
-  artistNameChunksToFullDisplayName,
+  artistNameChunksToDisplayName,
   artistNameChunksToUrlPath,
   urlPathToArtworkTitle,
 };
