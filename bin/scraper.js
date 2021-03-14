@@ -1,3 +1,6 @@
+const utils = require('./utils');
+const fetch = require('node-fetch');
+
 function getImgSrcFromArtworkPageHtml(html) {
   let htmlShort = html.substring(0, 20000);
   let imgStartIdx = htmlShort.indexOf('<img');
