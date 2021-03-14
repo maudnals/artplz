@@ -1,12 +1,25 @@
 #! /usr/bin/env node
 
 const term = require('terminal-kit').terminal;
-const fetch = require('node-fetch');
-const utils = require('./utils');
-const scraper = require('./scraper');
+const {
+  urlPathToArtworkTitle,
+  artistNameChunksToDisplayName,
+} = require('./utils');
+const { getArtworkWikiPagePath, getImgSrc } = require('./scraper');
+const {
+  logArtworkAndCaption,
+  logWait,
+  logBye,
+  logError,
+  getArtistName,
+  logArtistDefault,
+} = require('./logger');
+const config = require('./config');
 
 (async function () {
   try {
+    const artistNameInput = await getArtistName();
+    let artistName = artistNameInput.trim();
     term.green('\n🎨 Artist?\n');
     const artistName = await term.inputField().promise;
     const artistNameChunks = artistName.split(' ').map((chunk) => chunk.trim());
@@ -15,46 +28,23 @@ const scraper = require('./scraper');
         term.red("\nOh no, that's empty or contains special characters 😳\n");
         term.red('\nTry again!\n');
         process.exit();
-      }
-    });
+    }
+    const artistNameChunks = artistName
+      .trim()
+      .split(' ')
+      .map((chunk) => chunk.trim())
+      .filter((chunk) => chunk);
 
-    term.green('\n\nLooking');
-    await term.slowTyping('...', { delay: 100 });
-
-    const artworkWikiPagePath = await fetch(
-      `https://en.wikipedia.org/wiki/${utils.artistNameChunksToUrlPath(
-        artistNameChunks
-      )}`
-    )
-      .then((response) => {
-        return response.text();
-      })
-      .then((html) => scraper.getArtworkWikiPagePathFromArtistPageHtml(html));
-
-    const imgSrc = await fetch(`https://en.wikipedia.org${artworkWikiPagePath}`)
-      .then((response) => {
-        return response.text();
-      })
-      .then(async (html) => scraper.getImgSrcFromArtworkPageHtml(html));
-    term.green('\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n');
-    await term.drawImage(`https:${imgSrc}`, {
-      shrink: { width: term.width * 2.2, height: term.height * 1.4 },
-    });
-    term.green('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
-    term.green('\n%s', utils.urlPathToArtworkTitle(artworkWikiPagePath));
-    term.green(
-      ' — %s \n',
-      utils.artistNameChunksToFullDisplayName(artistNameChunks)
-    );
-    term.green('Wikipedia');
-
-    await term.slowTyping('\n\nOK Bye! ✨\n', { delay: 90 });
+    await logWait();
+    const artworkWikiPagePath = await getArtworkWikiPagePath(artistNameChunks);
+    const artworkTitle = await urlPathToArtworkTitle(artworkWikiPagePath);
+    const imgSrc = await getImgSrc(artworkWikiPagePath);
+    const artistDisplayName = artistNameChunksToDisplayName(artistNameChunks);
+    await logArtworkAndCaption(imgSrc, artworkTitle, artistDisplayName);
+    await logBye();
     process.exit();
   } catch (error) {
-    term.red(error);
-    term.red(
-      '💥 Uuh crashed while painting, look away and pretend nothing happened!'
-    );
+    logError(error);
     process.exit();
   }
 })();

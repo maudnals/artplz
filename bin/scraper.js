@@ -47,7 +47,29 @@ function getArtworkWikiPagePathFromArtistPageHtml(html) {
   return artworkWikiPagePath;
 }
 
+async function getArtworkWikiPagePath(artistNameChunks) {
+  const artworkWikiPagePath = await fetch(
+    `https://en.wikipedia.org/wiki/${utils.artistNameChunksToUrlPath(
+      artistNameChunks
+    )}`
+  )
+    .then((response) => {
+      return response.text();
+    })
+    .then((html) => getArtworkWikiPagePathFromArtistPageHtml(html));
+  return artworkWikiPagePath;
+}
+
+async function getImgSrc(artworkWikiPagePath) {
+  const imgSrc = await fetch(`https://en.wikipedia.org${artworkWikiPagePath}`)
+    .then((response) => {
+      return response.text();
+    })
+    .then(async (html) => getImgSrcFromArtworkPageHtml(html));
+  return imgSrc;
+}
+
 module.exports = {
-  getImgSrcFromArtworkPageHtml,
-  getArtworkWikiPagePathFromArtistPageHtml,
+  getArtworkWikiPagePath,
+  getImgSrc,
 };
