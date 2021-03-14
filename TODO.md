@@ -4,12 +4,21 @@
 
 - Document how to install (see README)
 
+**Code quality:**
+
+- Move out of bin?
+- Alternative to accessing exports inline? `.then((html) => scraper.getArtworkWikiPagePathFromArtistPageHtml(html));`
+- Add prettier
+- Better async management
+- TypeScript
+
 **Tests:**
 
 - Add a few tests: van gogh
 
 **Bugfix:**
 
+- See all default artists and bug that happen with these
 - Proper process exit
 - Monet bug
   🎨 Artist?
@@ -20,19 +29,12 @@
 
 **Features:**
 
-- [DONE] When "enter" (empty input), pick an artist instead of ""\nOh no, that's empty or contains special characters 😳. Try again!\n""
-- Random artist indtead of always Van Gogh
+- Random artist instead of always Van Gogh
 - "Continue" mode
 - Bigger/Smaller image? Better viewportfit? Center?
 - Add frame
-- Display anmation WHILE img load
-- Mode without manual input for artist (just pick one!)
+- Display animation WHILE img load
 - Mode with artist as command line argument
 - Fail more gracefully: if no artwork list but it's an artist, take image from page.
-
-**Code quality:**
-
-- ALternative to accessing exports inline? `.then((html) => scraper.getArtworkWikiPagePathFromArtistPageHtml(html));`
-- Add prettier
-- Better async management
-- TypeScript
+- [DONE] When "enter" (empty input), pick an artist instead of ""\nOh no, that's empty or contains special characters 😳. Try again!\n"
+- [DONE] Mode without manual input for artist (just pick one!)

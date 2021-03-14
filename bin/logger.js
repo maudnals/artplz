@@ -20,11 +20,7 @@ async function logArtworkAndCaption(imgSrc, artworkTitle, artistName) {
   logCaption(artworkTitle, artistName);
 }
 
-async function logArtistDefault() {
-  term.green(`\nOK, picked one for you.`);
-}
-
-async function logWait(artistNameChunks) {
+async function logWait() {
   term.green('\n\nLooking');
   await term.slowTyping('...\n\n', { delay: 100 });
 }
@@ -39,7 +35,7 @@ function logError(error) {
 }
 
 async function getArtistName() {
-  term.green('\n🎨 Artist?\n');
+  term.green('\n🎨 Artist? (press ENTER for random artist)\n');
   // user input
   return await term.inputField().promise;
 }
@@ -50,5 +46,4 @@ module.exports = {
   logBye,
   logError,
   getArtistName,
-  logArtistDefault,
 };

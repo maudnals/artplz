@@ -1,6 +1,8 @@
 const utils = require('./utils');
 const fetch = require('node-fetch');
 
+const WIKI_BASE_URL = 'https://en.wikipedia.org';
+
 function getImgSrcFromArtworkPageHtml(html) {
   let htmlShort = html.substring(0, 20000);
   let imgStartIdx = htmlShort.indexOf('<img');
@@ -51,9 +53,7 @@ function getArtworkWikiPagePathFromArtistPageHtml(html) {
 
 async function getArtworkWikiPagePath(artistNameChunks) {
   const artworkWikiPagePath = await fetch(
-    `https://en.wikipedia.org/wiki/${utils.artistNameChunksToUrlPath(
-      artistNameChunks
-    )}`
+    `${WIKI_BASE_URL}/wiki/${utils.artistNameChunksToUrlPath(artistNameChunks)}`
   )
     .then((response) => {
       return response.text();
@@ -63,7 +63,7 @@ async function getArtworkWikiPagePath(artistNameChunks) {
 }
 
 async function getImgSrc(artworkWikiPagePath) {
-  const imgSrc = await fetch(`https://en.wikipedia.org${artworkWikiPagePath}`)
+  const imgSrc = await fetch(`${WIKI_BASE_URL}${artworkWikiPagePath}`)
     .then((response) => {
       return response.text();
     })
