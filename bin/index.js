@@ -4,7 +4,6 @@ const term = require('terminal-kit').terminal;
 const fetch = require('node-fetch');
 const utils = require('./utils');
 const scraper = require('./scraper');
-const formatter = require('./formatter');
 
 (async function () {
   try {
@@ -23,7 +22,7 @@ const formatter = require('./formatter');
     await term.slowTyping('...', { delay: 100 });
 
     const artworkWikiPagePath = await fetch(
-      `https://en.wikipedia.org/wiki/${formatter.artistNameChunksToUrlPath(
+      `https://en.wikipedia.org/wiki/${utils.artistNameChunksToUrlPath(
         artistNameChunks
       )}`
     )
@@ -42,10 +41,10 @@ const formatter = require('./formatter');
       shrink: { width: term.width * 2.2, height: term.height * 1.4 },
     });
     term.green('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
-    term.green('\n%s', formatter.urlPathToArtworkTitle(artworkWikiPagePath));
+    term.green('\n%s', utils.urlPathToArtworkTitle(artworkWikiPagePath));
     term.green(
       ' — %s \n',
-      formatter.artistNameChunksToFullDisplayName(artistNameChunks)
+      utils.artistNameChunksToFullDisplayName(artistNameChunks)
     );
     term.green('Wikipedia');
 
