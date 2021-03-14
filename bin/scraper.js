@@ -5,8 +5,8 @@ function getImgSrcFromArtworkPageHtml(html) {
   let htmlShort = html.substring(0, 20000);
   let imgStartIdx = htmlShort.indexOf('<img');
   if (imgStartIdx === -1) {
-    console.log('\n👀 No image found on the artwork page.');
-    process.exit();
+    // TEST THIS: "yyt"
+    throw 'No image found on the artwork page';
   }
   let imgEl = htmlShort.substring(imgStartIdx, imgStartIdx + 400);
   // (picasso bugfix): wikipedia may have small utility images on top of the page
@@ -19,7 +19,6 @@ function getImgSrcFromArtworkPageHtml(html) {
   const imgAttributes = imgEl.split(' ');
   const srcStr = imgAttributes.find((attr) => attr.startsWith('src='));
   const imgSrc = srcStr.substring(`src="`.length, srcStr.length - `"`.length);
-  console.log(imgSrc);
   return imgSrc;
 }
 
@@ -33,8 +32,8 @@ function getArtworkWikiPagePathFromArtistPageHtml(html) {
 
   // (chagall bugfix): "List of artworks" is yet another link
   if (artworkListStartIdx === -1 || artworksHtml.includes('List of')) {
-    console.log("\n👀 No artwork list found on the artist's page.");
-    process.exit();
+    // TEST THIS: "yyt"
+    throw 'No image found on the artwork page';
   }
 
   const artworkWikiPagePaths = artworksHtml
