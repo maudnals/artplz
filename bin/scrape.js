@@ -1,4 +1,4 @@
-const utils = require('./utils');
+const { artistNameChunksToUrlPath } = require('./utils');
 const fetch = require('node-fetch');
 
 const WIKI_BASE_URL = 'https://en.wikipedia.org';
@@ -25,18 +25,30 @@ function getImgSrcFromArtworkPageHtml(html) {
 }
 
 function getArtworkWikiPagePathFromArtistPageHtml(html) {
+  // htmlShort and htmlShorter save time on parsing
   const htmlShort = html.substring(0, 20000);
-  const artworkListStartIdx = htmlShort.indexOf('Notable work');
-  const artworksHtml = htmlShort.substring(
-    artworkListStartIdx,
-    artworkListStartIdx + 1100
-  );
 
-  // (chagall bugfix): "List of artworks" is yet another link
-  if (artworkListStartIdx === -1 || artworksHtml.includes('List of')) {
-    // TEST THIS: "yyt"
-    throw 'No image found on the artwork page';
+  // on a painter's page, their work is listed under
+  // either 'Notable work' or 'Works'
+  let artworkListStartIdx = htmlShort.indexOf('Notable work');
+  if (artworkListStartIdx === -1) {
+    artworkListStartIdx = htmlShort.indexOf('Works');
   }
+
+  // if (artworkListStartIdx === -1) {
+  // example: derain++++ beautiful, botero
+  // + chagall (list)
+  //   console.log('no artwork list');
+  //   // throw "No artwork list found on the artist's page";
+  //   return '/wiki/File:Derain_CharingCrossBridge.png';
+  // }
+
+  const htmlShorter = htmlShort.substring(
+    artworkListStartIdx,
+    artworkListStartIdx + 6000
+  );
+  const artworkListEndIdx = htmlShorter.indexOf('</td>');
+  const artworksHtml = htmlShorter.substring(0, artworkListEndIdx);
 
   const artworkWikiPagePaths = artworksHtml
     // split to distinguish artworks
@@ -53,7 +65,7 @@ function getArtworkWikiPagePathFromArtistPageHtml(html) {
 
 async function getArtworkWikiPagePath(artistNameChunks) {
   const artworkWikiPagePath = await fetch(
-    `${WIKI_BASE_URL}/wiki/${utils.artistNameChunksToUrlPath(artistNameChunks)}`
+    `${WIKI_BASE_URL}/wiki/${artistNameChunksToUrlPath(artistNameChunks)}`
   )
     .then((response) => {
       return response.text();
