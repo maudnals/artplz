@@ -8,15 +8,15 @@ const {
 const { getArtworkWikiPagePath, getImgSrc } = require('./scraper');
 const { logArtworkAndCaption, logWait, logBye, logError } = require('./logger');
 const { getArtistName } = require('./input');
+const { exitKey, randomArtists } = require('./config');
 
 async function main() {
   const artistNameInput = await getArtistName();
-    let artistName =
-      artistNameInput.trim() || getRandomArtist(config.randomArtists);
-    if (!artistName) {
-      const { randomArtists } = config;
-      artistName = getRandomArtist(randomArtists);
+  if (artistNameInput && artistNameInput.toLowerCase() === exitKey) {
+    await logBye();
+    process.exit();
   }
+  let artistName = artistNameInput.trim() || getRandomArtist(randomArtists);
   const artistNameChunks = artistName
     .trim()
     .split(' ')

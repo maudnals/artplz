@@ -7,6 +7,7 @@ const config = {
     'mondrian',
     'edward hopper',
   ],
+  exitKey: 'x',
 };
 
 module.exports = config;
