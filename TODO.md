@@ -1,22 +1,29 @@
-# TODO
+# TODOs
 
-**Doc:**
+## Doc
 
+- Say "do not install"
 - Document how to install (see README)
+- Blogpost so I can remember the bugs
 
-**Code quality:**
+## Security
+
+- Sanitize user input
+
+## Code quality
 
 - Move out of bin?
-- Alternative to accessing exports inline? `.then((html) => scraper.getArtworkWikiPagePathFromArtistPageHtml(html));`
+- Alternative to accessing exports inline? `.then((html) => scrape.getArtworkWikiPagePathFromArtistPageHtml(html));`
 - Add prettier
-- Better async management
-- TypeScript
+- Better async management: then or awaits everywhere
+- Better error management
+- [NO] TypeScript
 
-**Tests:**
+## Tests
 
-- Add a few tests: van gogh
+- Add a few tests e.g. van gogh
 
-**Bugfix:**
+## Bugfix
 
 - See all default artists and bug that happen with these
 - Proper process exit
@@ -27,14 +34,17 @@
   Error: Bad image URL: Error: Unsupported file type: text/html; charset=utf-8💥 Uuh crashed while painting, look away and pretend nothing happened!%
 - Dali Bug (not an artist page, land on disambiguation)
 
-**Features:**
+## Features
 
-- Random artist instead of always Van Gogh
 - "Continue" mode
 - Bigger/Smaller image? Better viewportfit? Center?
-- Add frame
+- [NO] Add funky frame all around
+- Support exit via command C
+- Support empty terminal via command K
+- Wait between 2 "Artist?" prints
 - Display animation WHILE img load
 - Mode with artist as command line argument
 - Fail more gracefully: if no artwork list but it's an artist, take image from page.
 - [DONE] When "enter" (empty input), pick an artist instead of ""\nOh no, that's empty or contains special characters 😳. Try again!\n"
 - [DONE] Mode without manual input for artist (just pick one!)
+- [DONE] Fallbackk === Random artist instead of always Van Gogh
