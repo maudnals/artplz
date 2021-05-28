@@ -6,14 +6,8 @@ const {
   getRandomArtist,
 } = require('./utils');
 const { getArtworkWikiPagePath, getImgSrc } = require('./scraper');
-const {
-  logArtworkAndCaption,
-  logWait,
-  logBye,
-  logError,
-  getArtistName,
-} = require('./logger');
-const config = require('./config');
+const { logArtworkAndCaption, logWait, logBye, logError } = require('./logger');
+const { getArtistName } = require('./input');
 
 (async function () {
   try {

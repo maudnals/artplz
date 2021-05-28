@@ -1,11 +1,15 @@
-const term = require('terminal-kit').terminal;
+const { terminal: term } = require('terminal-kit');
+
+function logBorder() {
+  term.yellow('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n');
+}
 
 async function logArtwork(imgSrc) {
-  term.yellow('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n');
+  logBorder();
   await term.drawImage(`https:${imgSrc}`, {
     shrink: { width: term.width * 2.2, height: term.height * 1.4 },
   });
-  term.yellow('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n');
+  logBorder();
 }
 
 function logCaption(artworkTitle, artistName) {
@@ -15,18 +19,19 @@ function logCaption(artworkTitle, artistName) {
 }
 
 async function logArtworkAndCaption(imgSrc, artworkTitle, artistName) {
-  // must await here otherwise ptint oder is messed up
+  // must await here
+  // otherwise print oder between order and caption is messed up
   await logArtwork(imgSrc);
   logCaption(artworkTitle, artistName);
 }
 
 async function logWait() {
   term.green('\n\nLooking');
-  await term.slowTyping('...\n\n', { delay: 100 });
+  await term.slowTyping('...\n\n', { delay: 40 });
 }
 
 async function logBye() {
-  await term.slowTyping('\n\nOK Bye! ✨\n', { delay: 90 });
+  await term.slowTyping('\n\nOK Bye! ✨\n', { delay: 40 });
 }
 
 function logError(error) {
@@ -34,16 +39,9 @@ function logError(error) {
   term.green('Uuuhh pretend nothing happened and try again plz 💜\n');
 }
 
-async function getArtistName() {
-  term.green('\n🎨 Artist? (press ENTER for random artist)\n');
-  // user input
-  return await term.inputField().promise;
-}
-
 module.exports = {
   logArtworkAndCaption,
   logWait,
   logBye,
   logError,
-  getArtistName,
 };
