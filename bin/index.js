@@ -35,7 +35,7 @@ async function main() {
     try {
       await main();
     } catch (error) {
-      logError(error);
+      // logError(error);
     }
   }
 })();
