@@ -12,7 +12,7 @@ function getImgSrcFromArtworkPageHtml(html) {
   }
   let imgEl = htmlShort.substring(imgStartIdx, imgStartIdx + 400);
   // (picasso bugfix): wikipedia may have small utility images on top of the page
-  // to check if it's a painting: check if SVG
+  // to check if it's not a painting: check if SVG
   if (imgEl.includes('svg')) {
     htmlShort = htmlShort.substring(imgStartIdx + 1, 20000);
     imgStartIdx = htmlShort.indexOf('<img');

@@ -5,8 +5,8 @@ const {
   artistNameChunksToDisplayName,
   getRandomArtist,
 } = require('./utils');
-const { getArtworkWikiPagePath, getImgSrc } = require('./scraper');
-const { logArtworkAndCaption, logWait, logBye, logError } = require('./logger');
+const { getArtworkWikiPagePath, getImgSrc } = require('./scrape');
+const { logArtworkAndCaption, logWait, logBye, logError } = require('./log');
 const { getArtistName } = require('./input');
 const { exitKey, randomArtists } = require('./config');
 

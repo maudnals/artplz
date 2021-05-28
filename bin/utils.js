@@ -30,6 +30,7 @@ function artistNameChunksToDisplayName(nameChunks) {
 // [ 'van', 'gogh' ] -> 'Van_Gogh'
 function artistNameChunksToUrlPath(nameChunks) {
   // (edward hopper bugfix) wikipedia capitalizes url path chunks
+  // so we need to do it, too
   return capitalizeAndJoin(nameChunks, '_');
 }
 
