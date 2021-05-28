@@ -48,3 +48,13 @@
 - [DONE] When "enter" (empty input), pick an artist instead of ""\nOh no, that's empty or contains special characters 😳. Try again!\n"
 - [DONE] Mode without manual input for artist (just pick one!)
 - [DONE] Fallbackk === Random artist instead of always Van Gogh
+
+  // console.log(artworkWikiPagePath);
+  // where does this error come from exactly??
+  // GOOD:
+  // const artworkWikiPagePath = '/wiki/Chop*Suey*(painting)';
+  // BAD:
+  // const artworkWikiPagePath = '/wiki/Evening;_Red_Tree';
+  // const idxRandom = Math.floor(Math.random() \* 2);
+  // const paths = ['/wiki/Chop_Suey_(painting)', '/wiki/Evening;\_Red_Tree'];
+  // const artworkWikiPagePath = paths[idxRandom];
