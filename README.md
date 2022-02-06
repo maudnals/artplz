@@ -1,5 +1,7 @@
 # README
 
+Do not install this!
+
 ### Install
 
 ### Run
@@ -19,7 +21,7 @@ node bin/index.js
 
 ### Edge cases
 
-OK edge cases supported:
+Edge cases supported:
 
 - Page is not an artist page
 - Page not found
