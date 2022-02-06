@@ -2,7 +2,12 @@
 
 ## Doc
 
-- Say "do not install"
+- Add a bugfix mode that logs the error
+- Exit on command C
+
+## Doc
+
+- Say "Do not install"
 - Document how to install (see README)
 - Blogpost so I can remember the bugs
 
@@ -25,8 +30,8 @@
 
 ## Bugfix
 
-- See all default artists and bug that happen with these
-- Fail more gracefully: if no artwork list but it's an artist, take image from page.
+- See all default artists and bugs that happen with these
+- Fail more gracefully: if no artwork list but it is an artist, take image from page.
 - Monet bug
   🎨 Artist?
   monet
@@ -39,11 +44,11 @@
 
 - [NO] Bigger/Smaller image? Better viewportfit? Center?
 - [NO] Display animation WHILE img load
+- [NO] Fit the frame nicely to the picture / Add funky frame all around
 - [DONE] When "enter" (empty input), pick an artist instead of ""\nOh no, that's empty or contains special characters 😳. Try again!\n"
 - [DONE] Mode without manual input for artist (just pick one!)
 - [DONE] Fallbackk === Random artist instead of always Van Gogh
 - [DONE] "Continue" mode
-- [NO] Add funky frame all around
 - [NO] Support exit via command C
 - [NO] Wait between 2 "Artist?" prints
 
