@@ -17,6 +17,7 @@
 
 ## Code quality
 
+- remove unneccessary code from utils
 - Move out of bin?
 - Alternative to accessing exports inline? `.then((html) => scrape.getArtworkWikiPagePathFromArtistPageHtml(html));`
 - Add prettier
