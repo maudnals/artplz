@@ -1,21 +1,32 @@
 const { terminal: term } = require('terminal-kit');
 
-function logBorder() {
-  term.yellow('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n');
+function logBorderTop() {
+  term.white('\n✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧\n');
+}
+
+function logBorderBottom() {
+  term.white('✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧ ✧\n');
 }
 
 async function logArtwork(imgSrc) {
-  logBorder();
-  await term.drawImage(`https:${imgSrc}`, {
-    shrink: { width: term.width * 2.2, height: term.height * 1.4 },
+  logBorderTop();
+  await term.drawImage(imgSrc.toString(), {
+    shrink: { width: term.width * 2, height: term.height * 1.2 },
   });
-  logBorder();
+  logBorderBottom();
 }
 
 function logCaption(artworkTitle, artistName) {
-  term.yellow('\n%s', artworkTitle);
-  term.yellow(' — %s \n', artistName);
-  term.yellow('Source: Wikipedia \n');
+  term.table([[`      ${artworkTitle}     `]], {
+    hasBorder: true,
+    contentHasMarkup: false,
+    width: artworkTitle.length + 15,
+    fit: true, // Activate all expand/shrink + wordWrap
+  });
+  if (artistName) {
+    term.white(' — %s \n', artistName);
+  }
+  term.blue('Source: WikiArt.org \n');
 }
 
 async function logArtworkAndCaption(imgSrc, artworkTitle, artistName) {
