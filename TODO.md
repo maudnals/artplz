@@ -42,6 +42,12 @@
 
 ## Features
 
+- "More from this artist"
+- "More from similar artists"
+- Game mode!!!
+- Display full URL for people to check out
+- Use terminal-kit table to display the title
+- Pick a genre
 - [NO] Bigger/Smaller image? Better viewportfit? Center?
 - [NO] Display animation WHILE img load
 - [NO] Fit the frame nicely to the picture / Add funky frame all around
