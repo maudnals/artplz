@@ -19,8 +19,7 @@ function logCaption(artworkTitle, artistName) {
 }
 
 async function logArtworkAndCaption(imgSrc, artworkTitle, artistName) {
-  // must await here
-  // otherwise print oder between order and caption is messed up
+  // `await` is needed to maintain the print oder between artwork and caption
   await logArtwork(imgSrc);
   logCaption(artworkTitle, artistName);
 }
@@ -36,7 +35,7 @@ async function logBye() {
 
 function logError(error) {
   term.red(`💥 Error: ${error}.\n\n`);
-  term.green('Uuuhh pretend nothing happened and try again plz 💜\n');
+  term.green('Uhh. Pretend nothing happened and try again plz 💜\n');
 }
 
 module.exports = {

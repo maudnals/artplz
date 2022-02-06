@@ -1,6 +1,6 @@
 # README
 
-Do not install this!
+Do not install this! This is radioactive; it's a weekend project with no coe review and no security checks.
 
 ### Install
 

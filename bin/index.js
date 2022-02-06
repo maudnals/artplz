@@ -3,12 +3,12 @@
 const {
   urlPathToArtworkTitle,
   artistNameChunksToDisplayName,
-  getRandomArtist,
 } = require('./utils');
 const { getArtworkWikiPagePath, getImgSrc } = require('./scrape');
 const { logArtworkAndCaption, logWait, logBye, logError } = require('./log');
 const { getArtistName } = require('./input');
-const { exitKey, randomArtists } = require('./config');
+const { exitKey } = require('./config');
+const { getRandomArtist } = require('./data');
 
 async function main() {
   const artistNameInput = await getArtistName();
@@ -16,7 +16,7 @@ async function main() {
     await logBye();
     process.exit();
   }
-  let artistName = artistNameInput.trim() || getRandomArtist(randomArtists);
+  let artistName = artistNameInput.trim() || getRandomArtist();
   const artistNameChunks = artistName
     .trim()
     .split(' ')
@@ -35,7 +35,7 @@ async function main() {
     try {
       await main();
     } catch (error) {
-      // logError(error);
+      logError(error);
     }
   }
 })();

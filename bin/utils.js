@@ -34,9 +34,9 @@ function artistNameChunksToUrlPath(nameChunks) {
   return capitalizeAndJoin(nameChunks, '_');
 }
 
-function getRandomArtist(randomArtists) {
-  const randomInt = getRandomInt(randomArtists.length);
-  return randomArtists[randomInt];
+function getRandomArrayElement(array) {
+  const randomInt = getRandomInt(array.length);
+  return array[randomInt];
 }
 
 function getRandomInt(max) {
@@ -49,5 +49,5 @@ module.exports = {
   artistNameChunksToDisplayName,
   artistNameChunksToUrlPath,
   urlPathToArtworkTitle,
-  getRandomArtist,
+  getRandomArrayElement,
 };
