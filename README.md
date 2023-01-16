@@ -1,6 +1,8 @@
 # README
 
-![artplz-demo](https://user-images.githubusercontent.com/9762897/212710369-0e1050e8-6ada-461d-a292-376c8b297a10.gif)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/9762897/212710369-0e1050e8-6ada-461d-a292-376c8b297a10.gif" />
+</p>
 
 ☢️ Do not install this! This is an unreviewed weekend project (with no security checks).
 
