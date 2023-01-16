@@ -1,8 +1,8 @@
 # README
 
-Do not install this! This is radioactive; it's a weekend project with no coe review and no security checks.
+![artplz-demo](https://user-images.githubusercontent.com/9762897/212710369-0e1050e8-6ada-461d-a292-376c8b297a10.gif)
 
-### Install
+☢️ Do not install this! This is an unreviewed weekend project (with no security checks).
 
 ### Run
 
@@ -12,7 +12,6 @@ node bin/index.js
 
 - [node CLI for beginners](https://developer.okta.com/blog/2019/06/18/command-line-app-with-nodejs#build-your-first-nodejs-command-line-application)
 - terminal-kit
-- Love
 
 ### Nice examples
 
@@ -33,4 +32,3 @@ Not supported:
 // console.log(blaaa);
 // artwork page is accessible but there's another image in there, typos
 // bug: vermeer, picasso (displays a small image)
-// If other issue, pick another artist.
